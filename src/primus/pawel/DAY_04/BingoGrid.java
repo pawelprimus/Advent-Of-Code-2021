@@ -5,15 +5,18 @@ import java.util.List;
 
 class BingoGrid {
 
-    List<BingoNumber> bingoNumbers = new ArrayList<>();
-    int[] markedColumns = new int[5];
-    int[] markedRows = new int[5];
+    private static final int MAX_COLUMNS= 5;
+    private static final int MAX_ROWS= 5;
     private static int  idIterator = 1;
     private final int  gridID;
 
+    private List<BingoNumber> bingoNumbers = new ArrayList<>();
+    private int[] markedColumns = new int[MAX_COLUMNS];
+    private int[] markedRows = new int[MAX_ROWS];
+    private boolean isBingo;
+
     BingoGrid() {
         this.gridID = idIterator++;
-
     }
 
     int getGridID() {
@@ -40,7 +43,7 @@ class BingoGrid {
        }
     }
 
-    public void markNumberfIfIsInGrid(int number) {
+    public void markNumberIfIsInGrid(int number) {
         for(BingoNumber bingoNumber : bingoNumbers){
 
             if(number == bingoNumber.getNumber()){
@@ -57,21 +60,36 @@ class BingoGrid {
     public boolean checkIfIsBingo(){
 
         for (int i = 0; i < markedColumns.length; i++) {
-            if(markedColumns[i] >= 5){
+            if(markedColumns[i] >= MAX_COLUMNS){
+                isBingo = true;
                 return true;
             }
 
         }
 
         for (int i = 0; i < markedRows.length; i++) {
-            if(markedRows[i] >= 5){
+            if(markedRows[i] >= MAX_ROWS){
+                isBingo = true;
                 return true;
             }
         }
-
         return false;
     }
 
+    public int getSumOfNotMarkedNumbers(){
+
+        int sum =0;
+        for(BingoNumber bingoNumber : bingoNumbers){
+            if(!bingoNumber.isMarked){
+                sum += bingoNumber.getNumber();
+            }
+        }
+        return sum;
+    }
+
+    boolean isBingo() {
+        return isBingo;
+    }
 }
 
 
@@ -98,11 +116,6 @@ class BingoNumber {
 
     int getColumn() {
         return column;
-    }
-
-
-    boolean isMarked() {
-        return isMarked;
     }
 
     void setMarked(final boolean marked) {

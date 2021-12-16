@@ -16,16 +16,13 @@ class DAY_04 {
         String[] chosenNumsString = input[0].split(",");
         int[] chosenNums = parseStringTabToIntTab(chosenNumsString);
 
-//        List<Integer> row = new ArrayList<>();
         List<List<Integer>> rows = new ArrayList<>();
         ArrayList<BingoGrid> bingoGrids = new ArrayList<>();
 
         Pattern p = Pattern.compile("\\d+");
 
-
         for (int i = 1; i < input.length; i++) {
             List<Integer> row = new ArrayList<>();
-
             Matcher m = p.matcher(input[i]);
             while (m.find()) {
                 row.add(Integer.parseInt(m.group()));
@@ -39,33 +36,35 @@ class DAY_04 {
             }
         }
 
-
-        for (BingoGrid bingoGrid : bingoGrids) {
-            //bingoGrid.printBingoNumbers();
-        }
-
         int numberIterator = 0;
+        int sumOfAllGrids = bingoGrids.size();
 
         outerLoop:
         for (Integer numberToMark : chosenNums) {
             numberIterator++;
             for (BingoGrid bingoGrid : bingoGrids) {
 
-                bingoGrid.markNumberfIfIsInGrid(numberToMark);
+                if (!bingoGrid.isBingo()) {
 
-                if (bingoGrid.checkIfIsBingo()) {
+                    bingoGrid.markNumberIfIsInGrid(numberToMark);
 
-                    System.out.println(bingoGrid.getGridID());
-                    System.out.println(numberIterator);
-                    break outerLoop;
+                    if (bingoGrid.checkIfIsBingo()) {
+                        int sumOfNotMarked = bingoGrid.getSumOfNotMarkedNumbers();
+                        System.out.println("ITERATOR: " + numberIterator);
+                        System.out.println("BINGO GIRD ID :" + bingoGrid.getGridID());
+                        System.out.println("SUM OF NOT MARKED NUMS " + sumOfNotMarked);
+                        System.out.println("LAST NUMBER TO MARK :" + numberToMark);
+                        System.out.println("RESULT = [" + sumOfNotMarked * numberToMark + "]");
+                        sumOfAllGrids--;
+
+                        if (sumOfAllGrids == 0) {
+                            break outerLoop;
+                        }
+                    }
                 }
             }
-
         }
 
-        for (String word : input) {
-            //  System.out.println(word);
-        }
     }
 
 
@@ -78,11 +77,4 @@ class DAY_04 {
         return chosenNums;
     }
 
-    public static void printList(List<Integer> list) {
-        System.out.println("Printing");
-        for (Integer str : list) {
-            System.out.println(str.toString());
-        }
-
-    }
 }
