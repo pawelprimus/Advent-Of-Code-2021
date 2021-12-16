@@ -1,7 +1,6 @@
 package primus.pawel.DAY_04;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,11 +27,11 @@ class DAY_04 {
             List<Integer> row = new ArrayList<>();
 
             Matcher m = p.matcher(input[i]);
-            while(m.find()) {
+            while (m.find()) {
                 row.add(Integer.parseInt(m.group()));
             }
             rows.add(row);
-            if(i%5 == 0 ){
+            if (i % 5 == 0) {
                 BingoGrid bingoGrid = new BingoGrid();
                 bingoGrid.setNumbers(rows);
                 bingoGrids.add(bingoGrid);
@@ -40,14 +39,32 @@ class DAY_04 {
             }
         }
 
-        
 
-        for(BingoGrid bingoGrid : bingoGrids){
-            bingoGrid.printGrid();
+        for (BingoGrid bingoGrid : bingoGrids) {
+            //bingoGrid.printBingoNumbers();
+        }
+
+        int numberIterator = 0;
+
+        outerLoop:
+        for (Integer numberToMark : chosenNums) {
+            numberIterator++;
+            for (BingoGrid bingoGrid : bingoGrids) {
+
+                bingoGrid.markNumberfIfIsInGrid(numberToMark);
+
+                if (bingoGrid.checkIfIsBingo()) {
+
+                    System.out.println(bingoGrid.getGridID());
+                    System.out.println(numberIterator);
+                    break outerLoop;
+                }
+            }
+
         }
 
         for (String word : input) {
-          //  System.out.println(word);
+            //  System.out.println(word);
         }
     }
 
@@ -61,9 +78,9 @@ class DAY_04 {
         return chosenNums;
     }
 
-    public static void printList(List<Integer> list){
+    public static void printList(List<Integer> list) {
         System.out.println("Printing");
-        for(Integer str : list){
+        for (Integer str : list) {
             System.out.println(str.toString());
         }
 
