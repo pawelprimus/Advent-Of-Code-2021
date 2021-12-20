@@ -9,7 +9,7 @@ import static primus.pawel.FileReader.readFileAsString;
 
 //2021-12-20 T:18:56:12
 //https://adventofcode.com/2021/day/6
-class DAY_06 {
+class DAY_06_1 {
 
     private final static int DAYS = 80;
 
