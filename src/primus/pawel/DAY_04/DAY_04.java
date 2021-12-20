@@ -1,5 +1,7 @@
 package primus.pawel.DAY_04;
 
+import primus.pawel.InputType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,7 +13,7 @@ class DAY_04 {
 
     public static void main(String[] args) throws Exception {
 
-        String[] input = readFileAsString("04").split("[\\r\\n]+");
+        String[] input = readFileAsString("04" , InputType.ORIGINAL).split("[\\r\\n]+");
 
         String[] chosenNumsString = input[0].split(",");
         int[] chosenNums = parseStringTabToIntTab(chosenNumsString);

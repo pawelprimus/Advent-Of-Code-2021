@@ -1,5 +1,7 @@
 package primus.pawel.DAY_01;
 
+import primus.pawel.InputType;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -9,7 +11,7 @@ class DAY_01_2 {
 
 
     public static void main(String[] args) throws Exception {
-        String[] input = readFileAsString("01").split("[\\r\\n]+");
+        String[] input = readFileAsString("01", InputType.ORIGINAL).split("[\\r\\n]+");
         int counter = 0;
         int sum = Integer.parseInt(input[0]) + Integer.parseInt(input[1]) + Integer.parseInt(input[2]);
         int oldSum = sum;

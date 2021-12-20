@@ -1,5 +1,7 @@
 package primus.pawel.DAY_03;
 
+import primus.pawel.InputType;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +11,7 @@ import static primus.pawel.FileReader.readFileAsString;
 class DAY_03 {
 
     public static void main(String[] args) throws Exception {
-        String[] input = readFileAsString("03").split("[\\r\\n]+");
+        String[] input = readFileAsString("03" , InputType.ORIGINAL).split("[\\r\\n]+");
         exercise_1(input);
         exercise_2(input);
     }
