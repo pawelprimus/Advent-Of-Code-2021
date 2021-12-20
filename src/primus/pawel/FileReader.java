@@ -7,14 +7,14 @@ public class FileReader {
 
     final static String FILE_PATH = System.getProperty("user.dir") + "\\src\\primus\\pawel\\DAY_";
     final static String INPUT_FILE_NAME = "input.txt";
-    final static String TEST_FILE_NAME = "test.txt";
+    final static String TEST_FILE_NAME = "input_test.txt";
 
 
 
     public static String readFileAsString(String day, InputType inputType) throws Exception {
         String fileName;
         if (inputType.equals(InputType.TEST)) {
-            fileName = INPUT_FILE_NAME;
+            fileName = TEST_FILE_NAME;
         } else {
             fileName = INPUT_FILE_NAME;
         }
