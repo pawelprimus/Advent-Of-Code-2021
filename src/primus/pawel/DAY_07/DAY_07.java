@@ -16,6 +16,8 @@ class DAY_07 {
         int minimalFuel = Integer.MAX_VALUE;
         int currentFuel = 0;
 
+        System.out.println(countFuel(11));
+
         for (int i = 0; i < input.length; i++) {
             initialState[i] = Integer.parseInt(input[i].trim());
             System.out.println(initialState[i]);
@@ -28,8 +30,7 @@ class DAY_07 {
 
             for (int j = 0; j < initialState.length; j++) {
 
-                currentFuel += Math.abs(initialState[j] - i);
-
+                currentFuel += countFuel(Math.abs(initialState[j] - i));
             }
 
             if (minimalFuel > currentFuel) {
@@ -39,9 +40,15 @@ class DAY_07 {
             System.out.println("Horizontal POS:" + i + " FUEL: " + currentFuel);
             currentFuel = 0;
         }
-
         System.out.println("RESULT: " + minimalFuel);
-
-
     }
+
+    public static int countFuel(int moves) {
+        int result = 0;
+        while (moves >= 0) {
+            result += moves--;
+        }
+        return result;
+    }
+
 }
